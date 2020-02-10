@@ -1,4 +1,4 @@
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (C) 2020 Rick Busarow
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -13,12 +13,9 @@
   ~ limitations under the License.
   -->
 
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="dispatch.android.lifecycle.runtime">
+<resources>
 
-    <application>
-        <uses-library
-            android:name="android.test.runner"
-            android:required="false" />
-    </application>
-</manifest>
+    <style name="FragmentScenarioEmptyFragmentActivityTheme" parent="android:Theme.WithActionBar">
+        <item name="android:windowIsFloating">false</item>
+    </style>
+</resources>

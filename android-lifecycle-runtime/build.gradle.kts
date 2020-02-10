@@ -41,12 +41,19 @@ android {
       )
     }
   }
+
+  useLibrary("android.test.runner")
+  useLibrary("android.test.base")
+  useLibrary("android.test.mock")
 }
 
 dependencies {
 
   implementation(Libs.Androidx.lifecycle)
-  testImplementation(Libs.Androidx.lifecycleRuntime)
+  implementation(Libs.Androidx.lifecycleLiveData)
+  implementation(Libs.Androidx.fragmentKtx) {
+    exclude(group = "androidx.lifecycle", module = "lifecycle-runtime-ktx")
+  }
 
   implementation(Libs.JakeWharton.timber)
 
@@ -57,13 +64,18 @@ dependencies {
 
   implementation(project(":core"))
   implementation(project(":extensions"))
+  testImplementation(project(":core-test-junit4"))
   testImplementation(project(":core-test-junit5"))
   testImplementation(project(":internal-test"))
 
   testImplementation(Libs.JUnit.jUnit5)
   testImplementation(Libs.KotlinTest.junit5runner)
   testImplementation(Libs.Kotlinx.Coroutines.test)
+  testImplementation(Libs.MockK.core)
 
-  testImplementation(Libs.Androidx.testRunner)
   testImplementation(Libs.Androidx.espresso)
+  testImplementation(Libs.Androidx.fragmentTesting)
+  testImplementation(Libs.Androidx.testRules)
+  testImplementation(Libs.Androidx.testRunner)
+  testImplementation(Libs.Robolectric.core)
 }

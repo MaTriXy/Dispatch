@@ -13,22 +13,30 @@
  * limitations under the License.
  */
 
-include(":android-espresso")
-include(":android-espresso:samples")
-include(":android-lifecycle-runtime")
-include(":android-lifecycle-runtime:samples")
-include(":android-lifecycle-viewmodel")
-include(":android-lifecycle-viewmodel:samples")
-include(":core")
-include(":core-test")
-include(":core-test-junit4")
-include(":core-test-junit4:samples")
-include(":core-test-junit5")
-include(":core-test-junit5:samples")
-include(":core-test:samples")
-include(":core:samples")
-include(":extensions")
-include(":extensions:samples")
-include(":internal-test")
-include(":internal-test-android")
-include(":sample")
+package dispatch.android.lifecycle
+
+import androidx.fragment.app.*
+import androidx.lifecycle.*
+import kotlinx.coroutines.*
+
+@ExperimentalCoroutinesApi
+fun Fragment.withViewLifecycleScope(
+  block: suspend LifecycleCoroutineScope.() -> Unit
+) {
+
+  var job: Job? = null
+
+  viewLifecycleOwnerLiveData.observe(
+    this@withViewLifecycleScope,
+    Observer { owner: LifecycleOwner? ->
+
+      job?.cancel()
+
+      val scope = owner?.lifecycleScope
+
+      job = scope?.launch {
+        scope.block()
+      }
+
+    })
+}

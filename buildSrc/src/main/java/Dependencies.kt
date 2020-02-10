@@ -83,6 +83,7 @@ object Libs {
     const val lifecycleRuntime = "androidx.lifecycle:lifecycle-runtime-ktx:2.2.0"
     const val lifecycleViewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
     const val espresso = "androidx.test.espresso:espresso-core:3.2.0"
+    const val testRules = "androidx.test:rules:1.2.0"
     const val testRunner = "androidx.test:runner:1.2.0"
   }
 
