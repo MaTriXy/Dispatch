@@ -18,6 +18,17 @@ package com.rickbusarow.dispatcherprovider
 import dispatch.core.*
 import kotlinx.coroutines.*
 import kotlin.coroutines.*
+import dispatch.core.asyncDefault as newAsyncDefault
+import dispatch.core.asyncIO as newAsyncIO
+import dispatch.core.asyncMain as newAsyncMain
+import dispatch.core.asyncMainImmediate as newAsyncMainImmediate
+import dispatch.core.asyncUnconfined as newAsyncUnconfined
+import dispatch.core.launchDefault as newLaunchDefault
+import dispatch.core.launchIO as newLaunchIO
+import dispatch.core.launchMain as newLaunchMain
+import dispatch.core.launchMainImmediate as newLaunchMainImmediate
+import dispatch.core.launchUnconfined as newLaunchUnconfined
+import kotlin.ReplaceWith as ReplaceWith1
 
 /**
  * Calls the specified suspending block with a given coroutine context, suspends until it completes, and returns
@@ -33,13 +44,13 @@ import kotlin.coroutines.*
  */
 @Deprecated(
   message = "This function was moved.  This will be removed with the 1.0.0 release.",
-  replaceWith = ReplaceWith("withDefault(context, block)", "dispatch.core.withDefault"),
+  replaceWith = ReplaceWith1("withDefault(context, block)", "dispatch.core.withDefault"),
   level = DeprecationLevel.WARNING
 )
 public suspend fun <T> withDefault(
   context: CoroutineContext = EmptyCoroutineContext,
   block: suspend CoroutineScope.() -> T
-): T = withDefault(context, block)
+): T = dispatch.core.withDefault(context, block)
 
 /**
  * Calls the specified suspending block with a given coroutine context, suspends until it completes, and returns
@@ -55,13 +66,13 @@ public suspend fun <T> withDefault(
  */
 @Deprecated(
   message = "This function was moved.  This will be removed with the 1.0.0 release.",
-  replaceWith = ReplaceWith("withIO(context, block)", "dispatch.core.withIO"),
+  replaceWith = ReplaceWith1("withIO(context, block)", "dispatch.core.withIO"),
   level = DeprecationLevel.WARNING
 )
 public suspend fun <T> withIO(
   context: CoroutineContext = EmptyCoroutineContext,
   block: suspend CoroutineScope.() -> T
-): T = withIO(context, block)
+): T = dispatch.core.withIO(context, block)
 
 /**
  * Calls the specified suspending block with a given coroutine context, suspends until it completes, and returns
@@ -77,13 +88,13 @@ public suspend fun <T> withIO(
  */
 @Deprecated(
   message = "This function was moved.  This will be removed with the 1.0.0 release.",
-  replaceWith = ReplaceWith("withMain(context, block)", "dispatch.core.withMain"),
+  replaceWith = ReplaceWith1("withMain(context, block)", "dispatch.core.withMain"),
   level = DeprecationLevel.WARNING
 )
 public suspend fun <T> withMain(
   context: CoroutineContext = EmptyCoroutineContext,
   block: suspend CoroutineScope.() -> T
-): T = withMain(context, block)
+): T = dispatch.core.withMain(context, block)
 
 /**
  * Calls the specified suspending block with a given coroutine context, suspends until it completes, and returns
@@ -99,7 +110,7 @@ public suspend fun <T> withMain(
  */
 @Deprecated(
   message = "This function was moved.  This will be removed with the 1.0.0 release.",
-  replaceWith = ReplaceWith(
+  replaceWith = ReplaceWith1(
     "withMainImmediate(context, block)",
     "dispatch.core.withMainImmediate"
   ),
@@ -107,7 +118,7 @@ public suspend fun <T> withMain(
 )
 public suspend fun <T> withMainImmediate(
   context: CoroutineContext = EmptyCoroutineContext, block: suspend CoroutineScope.() -> T
-): T = withMainImmediate(context, block)
+): T = dispatch.core.withMainImmediate(context, block)
 
 /**
  * Calls the specified suspending block with a given coroutine context, suspends until it completes, and returns
@@ -123,7 +134,7 @@ public suspend fun <T> withMainImmediate(
  */
 @Deprecated(
   message = "This function was moved.  This will be removed with the 1.0.0 release.",
-  replaceWith = ReplaceWith(
+  replaceWith = ReplaceWith1(
     "withUnconfined(context, block)",
     "dispatch.core.withUnconfined"
   ),
@@ -132,7 +143,7 @@ public suspend fun <T> withMainImmediate(
 public suspend fun <T> withUnconfined(
   context: CoroutineContext = EmptyCoroutineContext,
   block: suspend CoroutineScope.() -> T
-): T = withUnconfined(context, block)
+): T = dispatch.core.withUnconfined(context, block)
 
 /**
  * Launches a new coroutine without blocking the current thread and returns a reference to the coroutine as a [Job].
@@ -147,14 +158,14 @@ public suspend fun <T> withUnconfined(
  */
 @Deprecated(
   message = "This function was moved.  This will be removed with the 1.0.0 release.",
-  replaceWith = ReplaceWith("launchDefault(context, start, block)", "dispatch.core.launchDefault"),
+  replaceWith = ReplaceWith1("launchDefault(context, start, block)", "dispatch.core.launchDefault"),
   level = DeprecationLevel.WARNING
 )
 public fun CoroutineScope.launchDefault(
   context: CoroutineContext = EmptyCoroutineContext,
   start: CoroutineStart = CoroutineStart.DEFAULT,
   block: suspend CoroutineScope.() -> Unit
-): Job = launchDefault(context, start, block)
+): Job = newLaunchDefault(context, start, block)
 
 /**
  * Launches a new coroutine without blocking the current thread and returns a reference to the coroutine as a [Job].
@@ -169,14 +180,14 @@ public fun CoroutineScope.launchDefault(
  */
 @Deprecated(
   message = "This function was moved.  This will be removed with the 1.0.0 release.",
-  replaceWith = ReplaceWith("launchIO(context, start, block)", "dispatch.core.launchIO"),
+  replaceWith = ReplaceWith1("launchIO(context, start, block)", "dispatch.core.launchIO"),
   level = DeprecationLevel.WARNING
 )
 public fun CoroutineScope.launchIO(
   context: CoroutineContext = EmptyCoroutineContext,
   start: CoroutineStart = CoroutineStart.DEFAULT,
   block: suspend CoroutineScope.() -> Unit
-): Job = launchIO(context, start, block)
+): Job = newLaunchIO(context, start, block)
 
 /**
  * Launches a new coroutine without blocking the current thread and returns a reference to the coroutine as a [Job].
@@ -191,14 +202,14 @@ public fun CoroutineScope.launchIO(
  */
 @Deprecated(
   message = "This function was moved.  This will be removed with the 1.0.0 release.",
-  replaceWith = ReplaceWith("launchMain(context, start, block)", "dispatch.core.launchMain"),
+  replaceWith = ReplaceWith1("launchMain(context, start, block)", "dispatch.core.launchMain"),
   level = DeprecationLevel.WARNING
 )
 public fun CoroutineScope.launchMain(
   context: CoroutineContext = EmptyCoroutineContext,
   start: CoroutineStart = CoroutineStart.DEFAULT,
   block: suspend CoroutineScope.() -> Unit
-): Job = launchMain(context, start, block)
+): Job = newLaunchMain(context, start, block)
 
 /**
  * Launches a new coroutine without blocking the current thread and returns a reference to the coroutine as a [Job].
@@ -213,7 +224,7 @@ public fun CoroutineScope.launchMain(
  */
 @Deprecated(
   message = "This function was moved.  This will be removed with the 1.0.0 release.",
-  replaceWith = ReplaceWith(
+  replaceWith = ReplaceWith1(
     "launchMainImmediate(context, start, block)",
     "dispatch.core.launchMainImmediate"
   ),
@@ -223,7 +234,7 @@ public fun CoroutineScope.launchMainImmediate(
   context: CoroutineContext = EmptyCoroutineContext,
   start: CoroutineStart = CoroutineStart.DEFAULT,
   block: suspend CoroutineScope.() -> Unit
-): Job = launchMainImmediate(context, start, block)
+): Job = newLaunchMainImmediate(context, start, block)
 
 /**
  * Launches a new coroutine without blocking the current thread and returns a reference to the coroutine as a [Job].
@@ -238,7 +249,7 @@ public fun CoroutineScope.launchMainImmediate(
  */
 @Deprecated(
   message = "This function was moved.  This will be removed with the 1.0.0 release.",
-  replaceWith = ReplaceWith(
+  replaceWith = ReplaceWith1(
     "launchUnconfined(context, start, block)",
     "dispatch.core.launchUnconfined"
   ),
@@ -248,7 +259,7 @@ public fun CoroutineScope.launchUnconfined(
   context: CoroutineContext = EmptyCoroutineContext,
   start: CoroutineStart = CoroutineStart.DEFAULT,
   block: suspend CoroutineScope.() -> Unit
-): Job = launchUnconfined(context, start, block)
+): Job = newLaunchUnconfined(context, start, block)
 
 /**
  * Creates a coroutine and returns its future result as an implementation of [Deferred].
@@ -262,7 +273,7 @@ public fun CoroutineScope.launchUnconfined(
  */
 @Deprecated(
   message = "This function was moved.  This will be removed with the 1.0.0 release.",
-  replaceWith = ReplaceWith(
+  replaceWith = ReplaceWith1(
     "asyncDefault(context, start, block)",
     "dispatch.core.asyncDefault"
   ),
@@ -272,7 +283,7 @@ public fun <T> CoroutineScope.asyncDefault(
   context: CoroutineContext = EmptyCoroutineContext,
   start: CoroutineStart = CoroutineStart.DEFAULT,
   block: suspend CoroutineScope.() -> T
-): Deferred<T> = asyncDefault(context, start, block)
+): Deferred<T> = newAsyncDefault(context, start, block)
 
 /**
  * Creates a coroutine and returns its future result as an implementation of [Deferred].
@@ -286,7 +297,7 @@ public fun <T> CoroutineScope.asyncDefault(
  */
 @Deprecated(
   message = "This function was moved.  This will be removed with the 1.0.0 release.",
-  replaceWith = ReplaceWith(
+  replaceWith = ReplaceWith1(
     "asyncIO(context, start, block)",
     "dispatch.core.asyncIO"
   ),
@@ -296,7 +307,7 @@ public fun <T> CoroutineScope.asyncIO(
   context: CoroutineContext = EmptyCoroutineContext,
   start: CoroutineStart = CoroutineStart.DEFAULT,
   block: suspend CoroutineScope.() -> T
-): Deferred<T> = asyncIO(context, start, block)
+): Deferred<T> = newAsyncIO(context, start, block)
 
 /**
  * Creates a coroutine and returns its future result as an implementation of [Deferred].
@@ -310,7 +321,7 @@ public fun <T> CoroutineScope.asyncIO(
  */
 @Deprecated(
   message = "This function was moved.  This will be removed with the 1.0.0 release.",
-  replaceWith = ReplaceWith(
+  replaceWith = ReplaceWith1(
     "asyncMain(context, start, block)",
     "dispatch.core.asyncMain"
   ),
@@ -320,7 +331,7 @@ public fun <T> CoroutineScope.asyncMain(
   context: CoroutineContext = EmptyCoroutineContext,
   start: CoroutineStart = CoroutineStart.DEFAULT,
   block: suspend CoroutineScope.() -> T
-): Deferred<T> = asyncMain(context, start, block)
+): Deferred<T> = newAsyncMain(context, start, block)
 
 /**
  * Creates a coroutine and returns its future result as an implementation of [Deferred].
@@ -334,7 +345,7 @@ public fun <T> CoroutineScope.asyncMain(
  */
 @Deprecated(
   message = "This function was moved.  This will be removed with the 1.0.0 release.",
-  replaceWith = ReplaceWith(
+  replaceWith = ReplaceWith1(
     "asyncMainImmediate(context, start, block)",
     "dispatch.core.asyncMainImmediate"
   ),
@@ -344,7 +355,7 @@ public fun <T> CoroutineScope.asyncMainImmediate(
   context: CoroutineContext = EmptyCoroutineContext,
   start: CoroutineStart = CoroutineStart.DEFAULT,
   block: suspend CoroutineScope.() -> T
-): Deferred<T> = asyncMainImmediate(context, start, block)
+): Deferred<T> = newAsyncMainImmediate(context, start, block)
 
 /**
  * Creates a coroutine and returns its future result as an implementation of [Deferred].
@@ -358,15 +369,14 @@ public fun <T> CoroutineScope.asyncMainImmediate(
  */
 @Deprecated(
   message = "This function was moved.  This will be removed with the 1.0.0 release.",
-  replaceWith = ReplaceWith(
-    "asyncUnconfined(context, start, block)",
+  replaceWith = ReplaceWith1(
+    "newAsyncUnconfined(context, start, block)",
     "dispatch.core.asyncUnconfined"
-  ),
-  level = DeprecationLevel.WARNING
+  ), level = DeprecationLevel.WARNING
 )
 public fun <T> CoroutineScope.asyncUnconfined(
   context: CoroutineContext = EmptyCoroutineContext,
   start: CoroutineStart = CoroutineStart.DEFAULT,
   block: suspend CoroutineScope.() -> T
-): Deferred<T> = asyncUnconfined(context, start, block)
+): Deferred<T> = newAsyncUnconfined(context, start, block)
 
