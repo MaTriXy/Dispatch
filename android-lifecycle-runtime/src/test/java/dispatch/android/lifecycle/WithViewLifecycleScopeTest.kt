@@ -15,48 +15,35 @@
 
 package dispatch.android.lifecycle
 
-import android.os.*
 import androidx.fragment.app.*
 import androidx.fragment.app.testing.*
-import dispatch.android.lifecycle.runtime.*
 import dispatch.core.test.*
 import kotlinx.coroutines.*
 import org.junit.*
 import org.junit.runner.*
 import org.robolectric.*
+import org.robolectric.annotation.*
 
 @ExperimentalCoroutinesApi
 @RunWith(RobolectricTestRunner::class)
+@Config(manifest = "../../../AndroidManifest.xml")
 internal class WithViewLifecycleScopeTest {
 
   @JvmField
   @Rule
   val rule = TestCoroutineRule()
 
-  lateinit var scenario: FragmentScenario<TestFragment>
 
-  @Before
-  fun setUp() {
 
-    val fragmentArgs = Bundle()
-    val factory = FragmentFactory()
-    scenario = FragmentScenario.launch<TestFragment>(
-      TestFragment::class.java,
-      fragmentArgs,
-      R.style.FragmentScenarioEmptyFragmentActivityTheme,
-      factory
-    )
-
-//    scenario = FragmentScenario.launch(TestFragment::class.java)
-  }
 
   @Test
-  fun lambda_should_be_invoked_when_viewLifecycleOwner_is_initialized() {
-
-    scenario.onFragment { fragment ->
-      println(fragment)
-
-    }
+  fun clickFullscreen_ShouldDelegateToViewModel() {
+    FragmentScenario.launchInContainer(TestFragment::class.java, null,
+      object : FragmentFactory() {
+        override fun instantiate(classLoader: ClassLoader, className: String): Fragment {
+          return TestFragment()
+        }
+      })
 
   }
 }

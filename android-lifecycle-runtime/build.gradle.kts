@@ -1,3 +1,5 @@
+import org.gradle.internal.impldep.org.junit.experimental.categories.Categories.CategoryFilter.*
+
 /*
  * Copyright (C) 2020 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -50,9 +52,9 @@ android {
 dependencies {
 
   implementation(Libs.Androidx.Lifecycle.common)
-  implementation(Libs.Androidx.lifecycleLiveData)
+  implementation(Libs.Androidx.Lifecycle.liveData)
   testImplementation(Libs.Androidx.Lifecycle.runtime)
-  implementation(Libs.Androidx.fragmentKtx) {
+  implementation(Libs.Androidx.Fragment.ktx) {
     exclude(group = "androidx.lifecycle", module = "lifecycle-runtime-ktx")
   }
 
@@ -69,14 +71,19 @@ dependencies {
   testImplementation(project(":core-test-junit5"))
   testImplementation(project(":internal-test"))
 
+
+
   testImplementation(Libs.JUnit.jUnit5)
   testImplementation(Libs.KotlinTest.junit5runner)
   testImplementation(Libs.Kotlinx.Coroutines.test)
   testImplementation(Libs.MockK.core)
 
+  debugImplementation(Libs.Androidx.Fragment.testing){
+    exclude(group = "androidx.lifecycle", module = "lifecycle-runtime-ktx")
+  }
+
   testImplementation(Libs.Androidx.testRunner)
   testImplementation(Libs.Androidx.espresso)
-  testImplementation(Libs.Androidx.fragmentTesting)
   testImplementation(Libs.Androidx.testRules)
   testImplementation(Libs.Androidx.testRunner)
   testImplementation(Libs.Robolectric.core)
