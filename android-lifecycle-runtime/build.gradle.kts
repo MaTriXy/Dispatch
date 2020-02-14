@@ -49,8 +49,9 @@ android {
 
 dependencies {
 
-  implementation(Libs.Androidx.lifecycle)
+  implementation(Libs.Androidx.Lifecycle.common)
   implementation(Libs.Androidx.lifecycleLiveData)
+  testImplementation(Libs.Androidx.Lifecycle.runtime)
   implementation(Libs.Androidx.fragmentKtx) {
     exclude(group = "androidx.lifecycle", module = "lifecycle-runtime-ktx")
   }
@@ -73,6 +74,7 @@ dependencies {
   testImplementation(Libs.Kotlinx.Coroutines.test)
   testImplementation(Libs.MockK.core)
 
+  testImplementation(Libs.Androidx.testRunner)
   testImplementation(Libs.Androidx.espresso)
   testImplementation(Libs.Androidx.fragmentTesting)
   testImplementation(Libs.Androidx.testRules)

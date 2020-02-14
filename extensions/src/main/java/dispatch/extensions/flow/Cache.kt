@@ -28,18 +28,10 @@ import kotlinx.coroutines.flow.*
  * When a collector begins collecting after values have already been recorded,
  * those values will be collected *before* values from the receiver [Flow] are collected.
  *
- * example:
- * ```Kotlin
- * val ints = flowOf(1, 2, 3, 4).cache(2)   // cache the last 2 values
- *
- * ints.take(4).collect {  }             // 4 values are emitted, but also recorded.  The last 2 remain.
- *
- * ints.collect {  }                     // collects [3, 4, 1, 2, 3, 4]
- * ```
- *
  * Throws [IllegalArgumentException] if size parameter is not greater than 0
  *
  * @param history the number of items to keep in the [Flow]'s history -- must be greater than 0
+ * @sample samples.CacheSample.cacheSample
  */
 @ExperimentalCoroutinesApi
 @FlowPreview

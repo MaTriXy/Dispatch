@@ -30,21 +30,7 @@ import kotlinx.coroutines.flow.*
  *
  * It can be demonstrated by the following example:
  *
- * ```
- * flow {
- *     emit(1)
- *     delay(50)
- *     emit(2)
- * }
- * .onEachLatest { value ->
- *     println("Collecting $value")
- *     delay(100) // Emulate work
- *     println("$value collected")
- * }
- * .launchIn(myScope)
- * ```
- *
- * prints "Collecting 1, Collecting 2, 2 collected"
+ * @sample samples.OnEachLatestSample.onEachLatestSample
  */
 @ExperimentalCoroutinesApi
 fun <T> Flow<T>.onEachLatest(action: suspend (T) -> Unit) = transformLatest { value ->
