@@ -21,22 +21,15 @@ import kotlinx.coroutines.*
 
 @ExperimentalCoroutinesApi
 fun Fragment.withViewLifecycleScope(
-  block: suspend LifecycleCoroutineScope.() -> Unit
+  block: LifecycleCoroutineScope.() -> Unit
 ) {
-
-  var job: Job? = null
 
   viewLifecycleOwnerLiveData.observe(
     this@withViewLifecycleScope,
     Observer { owner: LifecycleOwner? ->
 
-      job?.cancel()
-
       val scope = owner?.lifecycleScope
 
-      job = scope?.launch {
-        scope.block()
-      }
-
+      scope?.block()
     })
 }
