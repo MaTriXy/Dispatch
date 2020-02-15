@@ -15,43 +15,47 @@
 
 package dispatch.android.lifecycle
 
+import androidx.arch.core.executor.testing.*
 import androidx.fragment.app.*
-import androidx.fragment.app.testing.*
+import androidx.lifecycle.*
 import dispatch.core.test.*
 import kotlinx.coroutines.*
 import org.junit.*
 import org.junit.runner.*
 import org.robolectric.*
 import org.robolectric.annotation.*
+import kotlin.properties.*
 
-@ExperimentalCoroutinesApi
 @RunWith(RobolectricTestRunner::class)
-@Config(manifest = "../../../AndroidManifest.xml")
+@Config(manifest = Config.NONE)
+@ExperimentalCoroutinesApi
 internal class WithViewLifecycleScopeTest {
 
   @JvmField
   @Rule
   val rule = TestCoroutineRule()
 
-
-
+  @JvmField
+  @Rule
+  val instantTaskRule = InstantTaskExecutorRule()
 
   @Test
   fun clickFullscreen_ShouldDelegateToViewModel() {
-    FragmentScenario.launchInContainer(TestFragment::class.java, null,
-      object : FragmentFactory() {
-        override fun instantiate(classLoader: ClassLoader, className: String): Fragment {
-          return TestFragment()
-        }
-      })
+    println("hello")
+
+    TestFragment(FakeLifecycleOwner(rule.dispatcherProvider.main))
 
   }
 }
 
+@Suppress("UNCHECKED_CAST")
 @ExperimentalCoroutinesApi
-class TestFragment : Fragment() {
+class TestFragment(
+  private val fragmentLifecycleOwner: FakeLifecycleOwner
+) : Fragment(), LifecycleOwner by fragmentLifecycleOwner {
 
   var invocations = 0
+    private set
 
   init {
 
@@ -60,4 +64,19 @@ class TestFragment : Fragment() {
       invocations++
     }
   }
+
+  var fakeViewLifecycleOwner by Delegates.observable<FakeLifecycleOwner?>(null) { _, _, new ->
+    fakeViewLifecycleOwnerLiveData.value = new
+  }
+
+  private val fakeViewLifecycleOwnerLiveData: MutableLiveData<FakeLifecycleOwner?> =
+    MutableLiveData(fakeViewLifecycleOwner)
+
+  override fun getViewLifecycleOwner(): LifecycleOwner = fakeViewLifecycleOwner!!
+
+  override fun getViewLifecycleOwnerLiveData() =
+    fakeViewLifecycleOwnerLiveData as LiveData<LifecycleOwner>
+
+  override fun getLifecycle(): Lifecycle = fragmentLifecycleOwner.lifecycle
 }
+

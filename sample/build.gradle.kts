@@ -86,6 +86,6 @@ dependencies {
   testImplementation(project(":core-test-junit4"))
   testImplementation(project(":core-test-junit5"))
 
-  androidTestImplementation(Libs.Androidx.testRunner)
-  androidTestImplementation(Libs.Androidx.espresso)
+  androidTestImplementation(Libs.Androidx.Test.runner)
+  androidTestImplementation(Libs.Androidx.Test.Espresso.core)
 }
