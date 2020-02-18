@@ -39,12 +39,10 @@ internal class WithViewLifecycleScopeTest {
   val instantTaskRule = InstantTaskExecutorRule()
 
   @Test
-  fun clickFullscreen_ShouldDelegateToViewModel() {
+  fun `lambda should be invoked when the livedata is set to non-null`() {
 
     val fragmentLifecycleOwner = FakeLifecycleOwner(rule.dispatcherProvider.main)
     val viewLifecycleOwner = FakeLifecycleOwner(rule.dispatcherProvider.main)
-
-    fragmentLifecycleOwner.resume()
 
     val fragment = TestFragment(fragmentLifecycleOwner)
 
@@ -53,8 +51,6 @@ internal class WithViewLifecycleScopeTest {
     fragment.setFakeViewLifecycleOwner(viewLifecycleOwner)
 
     fragment.invocations shouldBe 1
-
-    viewLifecycleOwner.create()
 
   }
 }

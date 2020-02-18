@@ -58,6 +58,7 @@ dependencies {
   implementation(project(":core"))
   implementation(project(":extensions"))
   testImplementation(project(":core-test"))
+  testImplementation(project(":core-test-junit4"))
   testImplementation(project(":core-test-junit5"))
   testImplementation(project(":internal-test"))
 
@@ -65,6 +66,8 @@ dependencies {
   testImplementation(Libs.KotlinTest.junit5runner)
   testImplementation(Libs.Kotlinx.Coroutines.test)
 
-  testImplementation(Libs.Androidx.testRunner)
+  testImplementation(Libs.Androidx.Test.Arch.core)
+  testImplementation(Libs.Androidx.Test.runner)
   testImplementation(Libs.Androidx.espresso)
+  testImplementation(Libs.Robolectric.core)
 }

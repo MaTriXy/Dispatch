@@ -16,5 +16,26 @@
 package dispatch.android.lifecycle
 
 import androidx.fragment.app.*
+import androidx.lifecycle.*
+import kotlinx.coroutines.*
 
-class TestActivity : FragmentActivity()
+@ExperimentalCoroutinesApi
+fun Fragment.withViewLifecycleScope(
+  block: LifecycleCoroutineScope.() -> Unit
+) {
+
+  val observer = Observer { owner: LifecycleOwner? ->
+
+    val scope = owner?.lifecycleScope
+
+    scope?.block()
+  }
+
+  viewLifecycleOwnerLiveData.observeForever(observer)
+
+  lifecycle.addObserver(LifecycleEventObserver { _, _ ->
+    if (lifecycle.currentState == Lifecycle.State.DESTROYED) {
+      viewLifecycleOwnerLiveData.removeObserver(observer)
+    }
+  })
+}
