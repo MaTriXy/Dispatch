@@ -35,7 +35,7 @@ object Plugins {
 object Versions {
   const val ktlint = "0.35.0"
   const val dokka = "0.10.1"
-  const val knit = "0.1.0"
+  const val knit = "0.1.1"
 
   const val compileSdk = 29
   const val minSdk = "21"
@@ -133,7 +133,7 @@ object Libs {
   object JUnit {
     const val jUnit4 = "junit:junit:4.12"
 
-    private const val version = "5.5.1"
+    private const val version = "5.6.0"
 
     const val jUnit5 = "org.junit.jupiter:junit-jupiter:$version"
     const val jUnit5Api = "org.junit.jupiter:junit-jupiter-api:$version"
@@ -165,6 +165,10 @@ object Libs {
       const val test = "org.jetbrains.kotlinx:kotlinx-coroutines-test:$version"
     }
 
+    object Knit {
+      const val test = "org.jetbrains.kotlinx:kotlinx-knit-test:${Versions.knit}"
+    }
+
   }
 
   object MockK {
@@ -180,9 +184,9 @@ object Libs {
         "com.rickbusarow.dispatch:dispatch-android-espresso:${Versions.versionName}"
       const val extensions = "com.rickbusarow.dispatch:dispatch-extensions:${Versions.versionName}"
       const val lifecycleRuntime =
-        "com.rickbusarow.dispatch:dispatch-android-lifecycle-runtime:${Versions.versionName}"
+        "com.rickbusarow.dispatch:dispatch-android-lifecycle:${Versions.versionName}"
       const val lifecycleViewModel =
-        "com.rickbusarow.dispatch:dispatch-android-lifecycle-viewmodel:${Versions.versionName}"
+        "com.rickbusarow.dispatch:dispatch-android-viewmodel:${Versions.versionName}"
       const val test = "com.rickbusarow.dispatch:dispatch-core-test:${Versions.versionName}"
       const val testJunit4 =
         "com.rickbusarow.dispatch:dispatch-core-test-junit4:${Versions.versionName}"
