@@ -68,6 +68,6 @@ dependencies {
 
   testImplementation(Libs.Androidx.Test.Arch.core)
   testImplementation(Libs.Androidx.Test.runner)
-  testImplementation(Libs.Androidx.espresso)
+  testImplementation(Libs.Androidx.Test.Espresso.core)
   testImplementation(Libs.Robolectric.core)
 }

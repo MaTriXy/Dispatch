@@ -16,26 +16,19 @@
 package dispatch.android.lifecycle
 
 import androidx.fragment.app.*
-import androidx.lifecycle.*
+import dispatch.android.lifecycle.internal.*
 import kotlinx.coroutines.*
 
 @ExperimentalCoroutinesApi
 fun Fragment.withViewLifecycleScope(
+  policy: ViewLifecycleScopePolicy = ViewLifecycleScopePolicy.EVERY,
   block: LifecycleCoroutineScope.() -> Unit
-) {
+) = when (policy) {
+  ViewLifecycleScopePolicy.ONCE  -> onNext(block)
+  ViewLifecycleScopePolicy.EVERY -> onEvery(block)
+}
 
-  val observer = Observer { owner: LifecycleOwner? ->
-
-    val scope = owner?.lifecycleScope
-
-    scope?.block()
-  }
-
-  viewLifecycleOwnerLiveData.observeForever(observer)
-
-  lifecycle.addObserver(LifecycleEventObserver { _, _ ->
-    if (lifecycle.currentState == Lifecycle.State.DESTROYED) {
-      viewLifecycleOwnerLiveData.removeObserver(observer)
-    }
-  })
+enum class ViewLifecycleScopePolicy {
+  ONCE,
+  EVERY
 }
