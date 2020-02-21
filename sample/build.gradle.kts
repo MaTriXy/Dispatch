@@ -89,5 +89,5 @@ dependencies {
   androidTestImplementation(project(":android-espresso"))
 
   androidTestImplementation(Libs.Androidx.Test.runner)
-  androidTestImplementation(Libs.Androidx.espresso)
+  androidTestImplementation(Libs.Androidx.Test.Espresso.core)
 }
