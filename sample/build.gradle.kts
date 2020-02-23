@@ -74,8 +74,9 @@ dependencies {
 
   implementation(project(":core"))
   implementation(project(":extensions"))
-  implementation(project(":android-lifecycle-runtime"))
-  implementation(project(":android-lifecycle-viewmodel"))
+  implementation(project(":android-lifecycle"))
+  implementation(project(":android-lifecycle-extensions"))
+  implementation(project(":android-viewmodel"))
 
   testImplementation(Libs.JUnit.jUnit4)
   testImplementation(Libs.JUnit.jUnit5)
@@ -87,6 +88,6 @@ dependencies {
 
   androidTestImplementation(project(":android-espresso"))
 
-  androidTestImplementation(Libs.Androidx.testRunner)
-  androidTestImplementation(Libs.Androidx.espresso)
+  androidTestImplementation(Libs.Androidx.Test.runner)
+  androidTestImplementation(Libs.Androidx.Test.Espresso.core)
 }
