@@ -29,10 +29,30 @@ import kotlinx.coroutines.*
  * @see CoroutineDispatcher
  */
 class IdlingDispatcherProvider(
+  /**
+   * [IdlingDispatcher] implementation of [DispatcherProvider.default],
+   * which typically corresponds to the [Dispatchers.Default] [CoroutineDispatcher].
+   */
   override val default: IdlingDispatcher,
+  /**
+   * [IdlingDispatcher] implementation of [DispatcherProvider.io],
+   * which typically corresponds to the [Dispatchers.IO] [CoroutineDispatcher].
+   */
   override val io: IdlingDispatcher,
+  /**
+   * [IdlingDispatcher] implementation of [DispatcherProvider.main],
+   * which typically corresponds to the [Dispatchers.Main] [CoroutineDispatcher].
+   */
   override val main: IdlingDispatcher,
+  /**
+   * [IdlingDispatcher] implementation of [DispatcherProvider.mainImmediate],
+   * which typically corresponds to the [Dispatchers.Main.immediate][MainCoroutineDispatcher.immediate] [CoroutineDispatcher].
+   */
   override val mainImmediate: IdlingDispatcher,
+  /**
+   * [IdlingDispatcher] implementation of [DispatcherProvider.unconfined],
+   * which typically corresponds to the [Dispatchers.Unconfined] [CoroutineDispatcher].
+   */
   override val unconfined: IdlingDispatcher
 ) : DispatcherProvider
 
@@ -50,14 +70,13 @@ class IdlingDispatcherProvider(
  */
 fun IdlingDispatcherProvider(
   delegate: DispatcherProvider = DefaultDispatcherProvider()
-): IdlingDispatcherProvider =
-  IdlingDispatcherProvider(
-    default = IdlingDispatcher(delegate.default),
-    io = IdlingDispatcher(delegate.io),
-    main = IdlingDispatcher(delegate.main),
-    mainImmediate = IdlingDispatcher(delegate.mainImmediate),
-    unconfined = IdlingDispatcher(delegate.unconfined)
-  )
+): IdlingDispatcherProvider = IdlingDispatcherProvider(
+  default = IdlingDispatcher(delegate.default),
+  io = IdlingDispatcher(delegate.io),
+  main = IdlingDispatcher(delegate.main),
+  mainImmediate = IdlingDispatcher(delegate.mainImmediate),
+  unconfined = IdlingDispatcher(delegate.unconfined)
+)
 
 /**
  * Register all [IdlingDispatcher] properties of the receiver [IdlingDispatcherProvider] with Espresso's [IdlingRegistry].

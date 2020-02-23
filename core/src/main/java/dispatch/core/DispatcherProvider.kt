@@ -28,6 +28,9 @@ import kotlin.coroutines.*
  */
 public interface DispatcherProvider : CoroutineContext.Element {
 
+  /**
+   * This unique [Key] property is what allows the `DispatcherProvider` to be stored in the [CoroutineContext].
+   */
   override val key: CoroutineContext.Key<*> get() = Key
 
   /**
@@ -62,7 +65,7 @@ public interface DispatcherProvider : CoroutineContext.Element {
    *
    * Corresponds to the [Dispatchers.Main.immediate][kotlinx.coroutines.MainCoroutineDispatcher.immediate] property in a default implementation.
    *
-   * @see [MainCoroutineDispatcher.immediate]
+   * @see MainCoroutineDispatcher.immediate
    */
   val mainImmediate: CoroutineDispatcher
 
@@ -71,10 +74,13 @@ public interface DispatcherProvider : CoroutineContext.Element {
    *
    * Corresponds to the [Dispatchers.Unconfined] property in a default implementation.
    *
-   * @see [Dispatchers.Unconfined]
+   * @see Dispatchers.Unconfined
    */
   val unconfined: CoroutineDispatcher
 
+  /**
+   * Unique [Key] definition which allows the `DispatcherProvider` to be stored in the [CoroutineContext].
+   */
   companion object Key : CoroutineContext.Key<DispatcherProvider>
 }
 

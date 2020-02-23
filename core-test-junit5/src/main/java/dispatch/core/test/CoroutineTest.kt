@@ -47,11 +47,22 @@ import kotlin.coroutines.*
 @ExtendWith(TestCoroutineExtension::class)
 interface CoroutineTest {
 
+  /**
+   * Optional parameter for defining a custom [TestProvidedCoroutineScope].
+   *
+   * Each iteration of a test will be a new invocation of this lambda.
+   */
   val testScopeFactory: () -> TestProvidedCoroutineScope
     get() = { TestProvidedCoroutineScope() }
 
+  /**
+   * The [TestProvidedCoroutineScope] which is created and managed by the `CoroutineTest`
+   */
   var testScope: TestProvidedCoroutineScope
 
+  /**
+   * Convenience function for invoking [runBlockingTestProvided] without an additional import.
+   */
   fun runBlockingTest(
     context: CoroutineContext = EmptyCoroutineContext,
     testBody: suspend TestCoroutineScope.() -> Unit
@@ -90,16 +101,36 @@ interface CoroutineTest {
 class TestCoroutineExtension(
   private val factory: () -> TestProvidedCoroutineScope = { TestProvidedCoroutineScope() }
 ) : TestInstancePostProcessor, BeforeEachCallback, AfterEachCallback {
-
+  /**
+   * The [TestProvidedCoroutineScope] which is created and managed by the `CoroutineTest`
+   */
   lateinit var testScope: TestProvidedCoroutineScope
+
+  /**
+   * The underlying [TestCoroutineDispatcher] which is responsible for virtual time control.
+   *
+   * @see UncaughtExceptionCaptor
+   * @see DelayController
+   */
   lateinit var dispatcher: TestCoroutineDispatcher
 
   private var testInstance: CoroutineTest? = null
 
+  /**
+   * @suppress
+   */
   override fun postProcessTestInstance(testInstance: Any?, context: ExtensionContext?) {
-    this.testInstance = testInstance as? CoroutineTest
+
+    // In a nested test, set the testInstance when the root class is initialized
+    // but don't re-set it for the nested classes
+    (testInstance as? CoroutineTest)?.let {
+      this.testInstance = it
+    }
   }
 
+  /**
+   * @suppress
+   */
   override fun beforeEach(context: ExtensionContext) {
 
     testScope = testInstance?.testScopeFactory?.invoke() ?: factory()
@@ -112,6 +143,9 @@ class TestCoroutineExtension(
     Dispatchers.setMain(dispatcher)
   }
 
+  /**
+   * @suppress
+   */
   override fun afterEach(context: ExtensionContext) {
     testScope.cleanupTestCoroutines()
     Dispatchers.resetMain()
