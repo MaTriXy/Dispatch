@@ -26,12 +26,11 @@ internal fun Fragment.onNext(
 
   val observer = Observer { owner: LifecycleOwner? ->
 
-    if (owner != null) {
-
+    if (invoked) {
+      viewLifecycleOwnerLiveData.removeObservers(this@onNext)
+    } else if (owner != null) {
       owner.lifecycleScope.block()
       invoked = true
-    } else if (invoked) {
-      viewLifecycleOwnerLiveData.removeObservers(this@onNext)
     }
   }
 

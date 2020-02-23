@@ -15,26 +15,16 @@
 
 package dispatch.android.lifecycle
 
-import androidx.fragment.app.*
-import dispatch.android.lifecycle.internal.*
+import androidx.lifecycle.*
 import kotlinx.coroutines.*
 
-/**
- * [CoroutineScope] helper for a [Fragment]'s [ViewLifecycleOwner][FragmentViewLifecycleOwner].
- *
- * This function observes a `Fragment`'s [viewLifecycleOwnerLiveData][androidx.fragment.app.Fragment.getViewLifecycleOwnerLiveData],
- * and invokes [block]
- */
 @ExperimentalCoroutinesApi
-fun Fragment.withViewLifecycleScope(
-  policy: ViewLifecycleScopePolicy = ViewLifecycleScopePolicy.EVERY,
-  block: LifecycleCoroutineScope.() -> Unit
-) = when (policy) {
-  ViewLifecycleScopePolicy.ONCE  -> onNext(block)
-  ViewLifecycleScopePolicy.EVERY -> onEvery(block)
-}
+class TestFragment(
+  fragmentLifecycleOwner: LifecycleOwner,
+  initBlock: TestFragment.() -> Unit
+) : FakeFragment(fragmentLifecycleOwner) {
 
-enum class ViewLifecycleScopePolicy {
-  ONCE,
-  EVERY
+  init {
+    initBlock()
+  }
 }
