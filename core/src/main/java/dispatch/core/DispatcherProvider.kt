@@ -65,7 +65,7 @@ public interface DispatcherProvider : CoroutineContext.Element {
    *
    * Corresponds to the [Dispatchers.Main.immediate][kotlinx.coroutines.MainCoroutineDispatcher.immediate] property in a default implementation.
    *
-   * @see [MainCoroutineDispatcher.immediate]
+   * @see MainCoroutineDispatcher.immediate
    */
   val mainImmediate: CoroutineDispatcher
 
@@ -74,7 +74,7 @@ public interface DispatcherProvider : CoroutineContext.Element {
    *
    * Corresponds to the [Dispatchers.Unconfined] property in a default implementation.
    *
-   * @see [Dispatchers.Unconfined]
+   * @see Dispatchers.Unconfined
    */
   val unconfined: CoroutineDispatcher
 
@@ -84,6 +84,11 @@ public interface DispatcherProvider : CoroutineContext.Element {
   companion object Key : CoroutineContext.Key<DispatcherProvider>
 }
 
+/**
+ * Creates a default implementation of [DispatcherProvider].
+ *
+ * @see DefaultDispatcherProvider
+ */
 public fun DispatcherProvider(): DispatcherProvider = DefaultDispatcherProvider()
 
 /**

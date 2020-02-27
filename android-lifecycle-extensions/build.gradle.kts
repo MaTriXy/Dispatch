@@ -56,8 +56,8 @@ dependencies {
   implementation(Libs.Kotlinx.Coroutines.android)
   implementation(Libs.Kotlinx.Coroutines.core)
 
-  implementation(project(":android-lifecycle"))
-  implementation(project(":core"))
+  api(project(":android-lifecycle"))
+  api(project(":core"))
   implementation(project(":extensions"))
   testImplementation(project(":core-test"))
   testImplementation(project(":core-test-junit4"))

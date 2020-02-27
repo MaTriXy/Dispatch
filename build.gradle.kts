@@ -81,11 +81,18 @@ allprojects {
           )
         }
         externalDocumentationLink {
+          url = URL("https://developer.android.com/reference/androidx/test/")
+          packageListUrl = URL(
+            "https://developer.android.com/reference/androidx/test/package-list"
+          )
+        }
+        externalDocumentationLink {
           url = URL("https://developer.android.com/reference/")
           packageListUrl = URL(
             "https://developer.android.com/reference/android/support/package-list"
           )
         }
+        externalDocumentationLink { url = URL("https://junit.org/junit4/javadoc/latest/") }
         externalDocumentationLink {
           url = URL(
             "https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-android/"
@@ -98,6 +105,12 @@ allprojects {
           url = URL("https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/")
           packageListUrl = URL(
             "https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/package-list"
+          )
+        }
+        externalDocumentationLink {
+          url = URL("https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-test/")
+          packageListUrl = URL(
+            "https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-test/package-list"
           )
         }
 
@@ -135,6 +148,13 @@ allprojects {
         )
 
         linkModuleDocs(
+          matchingModules = listOf("android-lifecycle-extensions"),
+          currentProject = this@proj,
+          currentTask = this@dokkaTask,
+          dependencyModule = "android-lifecycle"
+        )
+
+        linkModuleDocs(
           matchingModules = listOf("core-test-junit4", "core-test-junit5"),
           currentProject = this@proj,
           currentTask = this@dokkaTask,
@@ -147,6 +167,10 @@ allprojects {
 
           description = "recreates all documentation for the /docs directory"
           group = "documentation"
+
+          doFirst {
+            updateReadMeArtifactVersions()
+          }
 
           dependsOn(
             rootProject.tasks.findByName("cleanDocs"),
