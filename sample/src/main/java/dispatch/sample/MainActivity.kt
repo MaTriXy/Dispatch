@@ -22,6 +22,7 @@ import android.os.*
 import androidx.activity.*
 import androidx.appcompat.app.*
 import androidx.lifecycle.*
+import dispatch.android.lifecycle.*
 import dispatch.core.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.*
@@ -30,6 +31,10 @@ import timber.log.*
 
 @ExperimentalCoroutinesApi
 class MainActivity : AppCompatActivity() {
+
+  init {
+    lifecycleScope
+  }
 
   val scope = MainCoroutineScope()
 

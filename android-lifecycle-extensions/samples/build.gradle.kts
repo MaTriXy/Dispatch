@@ -40,6 +40,7 @@ android {
 
 dependencies {
 
+  implementation(Libs.Androidx.Fragment.core)
   implementation(Libs.Androidx.Lifecycle.common)
   implementation(Libs.Androidx.Lifecycle.liveData)
   testImplementation(Libs.Androidx.Lifecycle.runtime)
@@ -49,19 +50,35 @@ dependencies {
   implementation(Libs.Kotlinx.Coroutines.core)
 
   implementation(project(":android-espresso"))
-  implementation(project(":android-lifecycle"))
   implementation(project(":android-lifecycle-extensions"))
-  implementation(project(":core"))
-  implementation(project(":core-test"))
+  implementation(project(":core-test-junit4"))
   implementation(project(":core-test-junit5"))
   implementation(project(":extensions"))
 
   testImplementation(Libs.JUnit.jUnit5)
+  testImplementation(Libs.JUnit.jUnit5Vintage)
   testImplementation(Libs.KotlinTest.junit5runner)
-
-  testImplementation(Libs.Kotlin.test)
-  testImplementation(Libs.Kotlin.testCommon)
-
   testImplementation(Libs.Kotlinx.Coroutines.test)
+
+  testImplementation(Libs.Androidx.Test.Arch.core)
+  testImplementation(Libs.Androidx.Test.runner)
+  testImplementation(Libs.Androidx.Test.Espresso.core)
+  testImplementation(Libs.Robolectric.core)
+
+//  api(project(":android-lifecycle"))
+//  api(project(":core"))
+//  implementation(project(":extensions"))
+//  testImplementation(project(":core-test"))
+//  testImplementation(project(":core-test-junit5"))
+//  testImplementation(project(":internal-test"))
+//
+//  testImplementation(Libs.JUnit.jUnit5)
+//  testImplementation(Libs.KotlinTest.junit5runner)
+//  testImplementation(Libs.Kotlinx.Coroutines.test)
+//
+//  testImplementation(Libs.Androidx.Test.Arch.core)
+//  testImplementation(Libs.Androidx.Test.runner)
+//  testImplementation(Libs.Androidx.Test.Espresso.core)
+//  testImplementation(Libs.Robolectric.core)
 
 }

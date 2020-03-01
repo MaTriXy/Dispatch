@@ -42,10 +42,9 @@ class LifecycleCoroutineScopeSample : CoroutineTest {
     // This could be any LifecycleOwner -- Fragments, Activities, Services...
     class SomeFragment : Fragment() {
 
-      init {
+      val lifecycleScope = LifecycleCoroutineScope(lifecycle, MainImmediateCoroutineScope())
 
-        // auto-created MainImmediateCoroutineScope which is lifecycle-aware
-        lifecycleScope //...
+      init {
 
         // active only when "resumed".  starts a fresh coroutine each time
         // this is a rough proxy for LiveData behavior
@@ -81,6 +80,8 @@ class LifecycleCoroutineScopeSample : CoroutineTest {
     class SomeFragment : Fragment() {
 
       val viewModel = SomeViewModel()
+
+      val lifecycleScope = LifecycleCoroutineScope(lifecycle, MainImmediateCoroutineScope())
 
       init {
 
@@ -132,6 +133,8 @@ class LifecycleCoroutineScopeSample : CoroutineTest {
 
       val viewModel = SomeViewModel()
 
+      val lifecycleScope = LifecycleCoroutineScope(lifecycle, MainImmediateCoroutineScope())
+
       init {
 
         lifecycleScope.launchOnCreate {
@@ -181,6 +184,8 @@ class LifecycleCoroutineScopeSample : CoroutineTest {
     class SomeFragment : Fragment() {
 
       val viewModel = SomeViewModel()
+
+      val lifecycleScope = LifecycleCoroutineScope(lifecycle, MainImmediateCoroutineScope())
 
       init {
         lifecycleScope.launchOnStart(minimumStatePolicy = CANCEL) {
@@ -232,6 +237,8 @@ class LifecycleCoroutineScopeSample : CoroutineTest {
     class SomeFragment : Fragment() {
 
       val viewModel = SomeViewModel()
+
+      val lifecycleScope = LifecycleCoroutineScope(lifecycle, MainImmediateCoroutineScope())
 
       init {
         lifecycleScope.launchOnStart {
@@ -298,6 +305,8 @@ class LifecycleCoroutineScopeSample : CoroutineTest {
 
       val viewModel = SomeViewModel()
 
+      val lifecycleScope = LifecycleCoroutineScope(lifecycle, MainImmediateCoroutineScope())
+
       init {
         lifecycleScope.launchOnResume(minimumStatePolicy = CANCEL) {
           viewModel.someFlow.collect {
@@ -348,6 +357,8 @@ class LifecycleCoroutineScopeSample : CoroutineTest {
     class SomeFragment : Fragment() {
 
       val viewModel = SomeViewModel()
+
+      val lifecycleScope = LifecycleCoroutineScope(lifecycle, MainImmediateCoroutineScope())
 
       init {
         lifecycleScope.launchOnResume {

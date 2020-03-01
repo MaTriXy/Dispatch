@@ -28,7 +28,7 @@ import org.robolectric.annotation.*
 @RunWith(RobolectricTestRunner::class)
 @Config(manifest = Config.NONE)
 @ExperimentalCoroutinesApi
-internal class WithViewLifecycleScopeDefaultArgTest {
+internal class WithViewLifecycleScopeTest {
 
   @JvmField
   @Rule
@@ -48,15 +48,16 @@ internal class WithViewLifecycleScopeDefaultArgTest {
   }
 
   @Test
-  fun `when the Fragment lifecycle is only created, lambda should be invoked`() {
+  fun `when the Fragment lifecycle is only created, lambda should not be invoked`() {
 
     val createdFragmentLifecycleOwner = FakeLifecycleOwner(rule.dispatcherProvider.main)
     createdFragmentLifecycleOwner.create()
 
     var invocations = 0
 
-    val fragment =
-      TestFragment(createdFragmentLifecycleOwner) { withViewLifecycleScope { invocations++ } }
+    val fragment = TestFragment(createdFragmentLifecycleOwner) {
+      withViewLifecycleScope { invocations++ }
+    }
 
     invocations shouldBe 0
 
@@ -70,7 +71,9 @@ internal class WithViewLifecycleScopeDefaultArgTest {
 
     var invocations = 0
 
-    val fragment = TestFragment(fragmentLifecycleOwner) { withViewLifecycleScope { invocations++ } }
+    val fragment = TestFragment(fragmentLifecycleOwner) {
+      withViewLifecycleScope { invocations++ }
+    }
 
     invocations shouldBe 0
 
@@ -84,7 +87,9 @@ internal class WithViewLifecycleScopeDefaultArgTest {
 
     var invocations = 0
 
-    val fragment = TestFragment(fragmentLifecycleOwner) { withViewLifecycleScope { invocations++ } }
+    val fragment = TestFragment(fragmentLifecycleOwner) {
+      withViewLifecycleScope { invocations++ }
+    }
 
     invocations shouldBe 0
 
@@ -109,7 +114,9 @@ internal class WithViewLifecycleScopeDefaultArgTest {
 
     var invocations = 0
 
-    val fragment = TestFragment(fragmentLifecycleOwner) { withViewLifecycleScope { invocations++ } }
+    val fragment = TestFragment(fragmentLifecycleOwner) {
+      withViewLifecycleScope { invocations++ }
+    }
 
     invocations shouldBe 0
 
